@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Entry Page</title>
+    <script>
+        function checkForm(){
+            if(document.getElementById("GameTitle").value == "")
+            {
+                event.preventDefault();
+                document.getElementById("err").innerHTML = "Please enter a valid title";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Enter your bugs here</h1>
+
+    <form action="/saveGame" method="post" onsubmit="return checkForm()">
+        <span id="err" style="color:red"></span>
+        <br>
+        <label for="game">Enter ID here!</label>
+        <br>
+        <input type="text" name="id" id="GameTitle" placeholder="Enter title here...">
+        <br>
+        <label for="game">Enter bug here!</label>
+        <br>
+        <input type="text" name="game" id="GameTitle" placeholder="Enter title here...">
+        <br>
+        <label for="game">Enter description here!</label>
+        <br>
+        <input type="text" name="desc" id="GameTitle" placeholder="Enter title here...">
+        <br>
+        <label for="game">Enter status here!</label>
+        <br>
+        <input type="text" name="status" id="GameTitle" placeholder="Enter title here...">
+        <br>
+        <button type="submit">Save Game</button>
+    </form>
+</body>
+</html>

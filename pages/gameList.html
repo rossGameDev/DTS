@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game List</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Bug List</h1>
+        <hr>
+        <nav>
+            <a href="index.html">Submit New Bugs Here</a>
+        </nav>
+        <hr>
+        <script>
+            fetch("/getGames").then(function(games){
+                games.json().then(function(theGames){
+                    console.log(theGames);
+                    //append out container html
+                    for(let game of theGames.game)
+                    {
+                        var gameElement = document.createElement('p');
+                        gameElement.innerHTML = gameElement.innerHTML + "ID: " + game.id;
+                        gameElement.innerHTML = gameElement.innerHTML + " | Bug: " + game.game;
+                        gameElement.innerHTML = gameElement.innerHTML + " | Description: " + game.desc;
+                        gameElement.innerHTML = gameElement.innerHTML + " | Status: " + game.status;
+
+                        document.getElementById("container").appendChild(gameElement);
+
+                        //add delete button
+                        /*var deleteButton = document.createElement("button");
+                        deleteButton.innerText = "Delete Game";
+                        deleteButton.addEventListener("click", function(){
+                            //fetch request to server to delete the game
+                            location.reload();
+                            fetch("/deleteGame", {
+                                method:"POST",
+                                headers:{
+                                    "Content-Type":"application/json"
+                                },
+                                body:JSON.stringify({
+                                    game:game._id
+                                })
+                            })
+                        });
+                        gameElement.appendChild(deleteButton);*/
+
+                        var updateButton = document.createElement("button");
+                        updateButton.innerText = "Update Status";
+                        updateButton.addEventListener("click", function(){
+                            //window.location.replace("/updatePage.html?id=" + game._id);
+                            window.location.replace("/getID:" + game._id + "&status=" + game.status);
+                            //fetch request to server to delete the game
+                            /*location.reload();
+                            fetch("/getID", {
+                                method:"POST",
+                                headers:{
+                                    "Content-Type":"application/json"
+                                },
+                                body:JSON.stringify({
+                                    game:game
+                                })
+                            })*/
+                        });
+                        gameElement.appendChild(updateButton);
+                    }
+                })
+            })
+        </script>
+    </div>
+</body>
+</html>
